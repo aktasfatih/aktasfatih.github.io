@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { StaticImage } from "gatsby-plugin-image"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -26,8 +27,25 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
-      <Bio />
-      Hey, I am currently working on this website. I will be adding more content. In the meantime, you could check out my twitter from above or contact me directly.
+      {/* <Bio /> */}
+      <StaticImage
+        className="bio-avatar"
+        layout="fixed"
+        formats={["auto", "webp", "avif"]}
+        src="../images/profile-pic.png"
+        width={150}
+        height={150}
+        style={{
+          marginBottom: `1.45rem`, 
+          marginLeft: "auto",
+          marginRight: "auto",
+          display: "block",
+
+        }}
+        quality={95}
+        alt="Profile picture"
+      />
+      Hey, I am currently working on this website. I will be adding more content. In the meantime, you could check out my<a href="http://www.twitter.com/moreincode"> twitter</a> or <a href = "mailto: abc@example.com">contact me</a> directly.
       {/* <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug

@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/',
   siteMetadata: {
     title: `Fatih Aktas`,
     author: {
@@ -117,8 +118,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Fatih's Personal Blog`,
+        short_name: `FatihBlog`,
         start_url: `/`,
         background_color: `#ffffff`,
         // This will impact how browsers show your PWA/website
