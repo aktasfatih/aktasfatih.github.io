@@ -9,8 +9,13 @@
   },
   "dependencies": {
     "@deckdeckgo/highlight-code": "^3.4.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "gatsby": "^4.0.2",
     "gatsby-plugin-feed": "^4.0.0",
+    "gatsby-plugin-fontawesome-css": "^1.1.0",
     "gatsby-plugin-gatsby-cloud": "^4.0.0",
     "gatsby-plugin-google-analytics": "^4.1.0",
     "gatsby-plugin-google-gtag": "^4.1.0",

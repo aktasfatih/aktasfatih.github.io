@@ -1,0 +1,14 @@
+
+.activate{
+    cursor: pointer;
+
+}
+.activate:hover{
+    background-color: lightsteelblue;
+    transition: 0.1s background-color;
+}
+
+a.content{
+    color: unset;
+    text-decoration: unset;
+}
