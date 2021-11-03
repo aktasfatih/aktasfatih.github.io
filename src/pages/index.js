@@ -45,7 +45,14 @@ const BlogIndex = ({ data, location }) => {
         quality={95}
         alt="Profile picture"
       />
-      Hey, I am currently working on this website. I will be adding more content. In the meantime, you could check out my<a href="http://www.twitter.com/moreincode"> twitter</a> or <a href = "mailto: abc@example.com">contact me</a> directly.
+      Computer Engineering Graduate from the University of Alberta.
+      <br />
+      Currently working as a Software Engineer at <a href="https://www.lumnion.com/">Lumnion</a>.
+      <br />
+      <br /> 
+      <span style={{fontSize:12}}>
+        <b>Note:</b> Hey, I am currently working on this website. I will be adding more content. In the meantime, you could check out my<a href="http://www.twitter.com/moreincode"> twitter</a> or <a href = "mailto: abc@example.com">contact me</a> directly.
+      </span>
       {/* <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
