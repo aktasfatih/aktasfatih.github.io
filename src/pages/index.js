@@ -8,7 +8,7 @@ import Seo from "../components/seo"
 import { StaticImage } from "gatsby-plugin-image"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedin, faTwitter, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 
 
 const BlogIndex = ({ data, location }) => {
@@ -59,8 +59,8 @@ const BlogIndex = ({ data, location }) => {
       <br />
       <br /> 
       
-      <div style={{display: "flex", flexDirection: 'row', textAlign:'center', padding: "20px"}}>
-        <a className="content" href="https://github.com/aktasfatih" >
+      <div style={{display: "flex", justifyContent:'space-around', flexDirection: 'row', textAlign:'center', padding: "20px"}}>
+        <a className="content" target="_blank" href="https://github.com/aktasfatih" >
           <div  className="activate" style={{flex:1, flexGrow:1 , verticalAlign:'center', padding: 10, textAlign:'center'}}>
             <FontAwesomeIcon icon={faGithub} style={{display: "inline-block", width: "50px", height: "50px"}}/>
             <div>
@@ -68,8 +68,18 @@ const BlogIndex = ({ data, location }) => {
             </div>
           </div>
         </a>
+        <a className="content" target="_blank" href="https://stackoverflow.com/users/5027899/fatih-akta%c5%9f" >
+          <div  className="activate" style={{flex:1, flexGrow:1 , verticalAlign:'center', padding: 10, textAlign:'center'}}>
+            <FontAwesomeIcon icon={faStackOverflow} style={{display: "inline-block", width: "50px", height: "50px"}}/>
+            <div>
+              stackoverflow.com
+            </div>
+          </div>
+        </a>
+      </div>
 
-        <a className="content" href="https://twitter.com/moreincode" >
+      <div style={{display: "flex", flexDirection: 'row', justifyContent:'space-around', textAlign:'center', padding: "20px"}}>
+        <a className="content" target="_blank" href="https://twitter.com/moreincode" >
           <div onClick={() => location.href='twitter.com/moreincode'} className="activate" style={{flex:1, flexGrow:1 , verticalAlign:'center', padding: 10, textAlign:'center'}}>
             <FontAwesomeIcon icon={faTwitter} style={{display: "inline-block", width: "50px", height: "50px"}}/>
             <div>
@@ -78,7 +88,7 @@ const BlogIndex = ({ data, location }) => {
           </div>
         </a> 
 
-        <a className="content" href="https://www.linkedin.com/in/fatih-aktas/" >
+        <a className="content" target="_blank" href="https://www.linkedin.com/in/fatih-aktas/" >
           <div onClick={() => {location.href='linkedin.com/in/fatih-aktas/'}} className="activate" style={{flex:1, flexGrow:1 , verticalAlign:'center', padding: 10, textAlign:'center'}}>
             <FontAwesomeIcon icon={faLinkedin} style={{display: "inline-block", width: "50px", height: "50px"}} />
             <div>
