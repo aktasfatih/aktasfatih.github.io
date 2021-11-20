@@ -13,3 +13,91 @@ a.content{
     text-decoration: unset;
     width:210px;
 }
+
+/* Metaballs */
+body {
+  font-family: 'Alatsi', sans-serif;
+  color: white;
+  margin: 0;
+  overflow: hidden;
+  background-color: black;
+  /* background: #263444; */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 10vw;
+  color: white;
+}
+
+/* For the links  */
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+a{
+    color: #ff253a;
+    font-weight: bold;
+}
+
+canvas {
+  width: 100%;
+  background-color:white;
+  opacity: 0.2;
+  z-index: -5;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 50px;
+}
+
+.flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.applyWidth{
+    width: 800px;
+}
+
+#profilePicture{
+    cursor: pointer;
+    /* width:450px; */
+    /* height:450px; */
+    transition: width 1s ease, height 1s ease, margin-bottom 1s ease, opacity 0.1s ease;
+    margin: 30px;
+}
+#profilePicture:hover{
+    /* width: 210px; */
+    /* height: 210px; */
+    /* margin-bottom: 10px; */
+    opacity: 0.7;
+}
