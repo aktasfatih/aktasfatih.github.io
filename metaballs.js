@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   var height = canvas.height = window.innerHeight * 0.75;
   document.body.prepend(canvas);
 
-  debugger;
   var gl = canvas.getContext('webgl');
   // Set the background color of canvas
   gl.clearColor(100,100,100,1)
