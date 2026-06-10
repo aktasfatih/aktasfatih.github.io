@@ -1,0 +1,49 @@
+/* ============================================================
+   TYPOGRAPHY — Fatih Aktas design system
+   ------------------------------------------------------------
+   Three voices, each with a job:
+   • Space Grotesk  → display & UI. Geometric, a little engineered.
+   • Newsreader     → long-form prose. Warm editorial serif.
+   • JetBrains Mono → code, labels, metadata. The "developer" signal.
+
+   Type scale is a 1.25 (major third) ramp off a 16px root.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-ui:      'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif:   'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---- Type scale (1.25 major third) ---- */
+  --text-xs:   0.75rem;   /* 12 — micro labels        */
+  --text-sm:   0.875rem;  /* 14 — meta, captions      */
+  --text-base: 1rem;      /* 16 — UI default          */
+  --text-md:   1.125rem;  /* 18 — lead UI / prose     */
+  --text-lg:   1.375rem;  /* 22                        */
+  --text-xl:   1.75rem;   /* 28                        */
+  --text-2xl:  2.25rem;   /* 36                        */
+  --text-3xl:  2.875rem;  /* 46                        */
+  --text-4xl:  3.75rem;   /* 60 — hero display         */
+  --text-5xl:  4.75rem;   /* 76 — oversized display    */
+
+  /* ---- Line heights ---- */
+  --leading-none:    1;
+  --leading-tight:   1.12;   /* display headings        */
+  --leading-snug:    1.3;    /* UI headings             */
+  --leading-normal:  1.5;    /* UI body                 */
+  --leading-relaxed: 1.72;   /* long-form serif reading */
+
+  /* ---- Tracking ---- */
+  --tracking-tight:  -0.02em;  /* large display          */
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-label:  0.14em;   /* mono eyebrow labels    */
+}

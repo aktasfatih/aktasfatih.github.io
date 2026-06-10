@@ -1,0 +1,132 @@
+/* ============================================================
+   COLORS — Fatih Aktas design system  ·  "Glacier"
+   ------------------------------------------------------------
+   A cool, crisp palette pulled straight from the glacial lake in
+   Fatih's portrait: snow-white surfaces, deep evergreen ink, and a
+   confident GLACIAL-TEAL accent. PINE and a cool LAKE-slate are the
+   quiet secondaries; a single warm AMBER is the lone "signal" pop
+   (a nod to old terminal phosphor). Deliberately not dev-blue.
+
+   Base ramps are raw values. Semantic aliases below map them to
+   roles — ALWAYS reference the semantic tokens in product code.
+   ============================================================ */
+
+:root {
+  /* ---- Cool neutral ramp (snow → evergreen ink) ---- */
+  --paper:        #eef2f1;  /* app background, cool snow        */
+  --paper-2:      #e3eae8;  /* sunken / alt surface             */
+  --surface:      #ffffff;  /* raised cards                     */
+  --neutral-100:  #dde5e2;
+  --neutral-200:  #c8d4d0;
+  --neutral-300:  #a9b8b3;
+  --neutral-400:  #889893;
+  --neutral-500:  #647570;  /* muted text                       */
+  --neutral-600:  #495853;
+  --neutral-700:  #323e39;
+  --neutral-800:  #1f2a26;
+  --ink:          #112019;  /* primary text, deep evergreen     */
+
+  /* ---- Glacial teal (primary accent) ---- */
+  --teal-50:   #e2f3ef;
+  --teal-100:  #c1e7df;
+  --teal-200:  #8fd3c6;
+  --teal-300:  #57bcab;
+  --teal-400:  #1f9d8a;
+  --teal-500:  #0e8a78;  /* brand teal                          */
+  --teal-600:  #097263;  /* hover / pressed                     */
+  --teal-700:  #06564a;
+
+  /* ---- Pine (secondary / success / nature) ---- */
+  --pine-100:  #d7e6df;
+  --pine-300:  #79a892;
+  --pine-500:  #3a6e5a;
+  --pine-700:  #224438;
+
+  /* ---- Lake-slate (info / cool support) ---- */
+  --lake-300:  #8bb4c4;
+  --lake-500:  #3d7f96;
+  --lake-700:  #2a5462;
+
+  /* ---- Functional warms ---- */
+  --amber-500: #cf8a1c;  /* warning + the one warm "signal" pop */
+  --rose-500:  #be463e;  /* danger/error                        */
+
+  /* ============================================================
+     SEMANTIC ALIASES — reference these in product code
+     ============================================================ */
+
+  /* Surfaces */
+  --bg-app:        var(--paper);
+  --bg-sunken:     var(--paper-2);
+  --surface-card:  var(--surface);
+  --surface-inset: var(--paper-2);
+
+  /* Text */
+  --text-strong:   var(--ink);
+  --text-body:     var(--neutral-800);
+  --text-muted:    var(--neutral-500);
+  --text-faint:    var(--neutral-400);
+  --text-on-accent: #ecfbf7;
+  --text-inverse:  var(--paper);
+
+  /* Brand / interactive */
+  --accent:        var(--teal-500);
+  --accent-hover:  var(--teal-600);
+  --accent-press:  var(--teal-700);
+  --accent-weak:   var(--teal-50);
+  --link:          var(--teal-600);
+  --link-visited:  var(--lake-700);
+
+  /* Lines & dividers */
+  --border:        var(--neutral-200);
+  --border-strong: var(--neutral-300);
+  --hairline:      color-mix(in oklab, var(--ink) 8%, transparent);
+  --ring:          color-mix(in oklab, var(--teal-500) 45%, transparent);
+
+  /* Selection */
+  --selection-bg:  var(--teal-100);
+  --selection-fg:  var(--ink);
+
+  /* Status */
+  --success:       var(--pine-500);
+  --warning:       var(--amber-500);
+  --danger:        var(--rose-500);
+  --info:          var(--lake-500);
+}
+
+/* ============================================================
+   DARK THEME — "glacial night". Apply [data-theme="dark"] on
+   <html> or any container. Cool spruce-black, teal glows.
+   ============================================================ */
+
+[data-theme="dark"] {
+  --bg-app:        #0e1614;
+  --bg-sunken:     #0a100f;
+  --surface-card:  #16211d;
+  --surface-inset: #121b18;
+
+  --text-strong:   #e8f1ee;
+  --text-body:     #cdd9d4;
+  --text-muted:    #8a9c96;
+  --text-faint:    #5d6c66;
+  --text-on-accent: #04201b;
+  --text-inverse:  var(--ink);
+
+  --accent:        var(--teal-400);
+  --accent-hover:  var(--teal-300);
+  --accent-press:  var(--teal-200);
+  --accent-weak:   color-mix(in oklab, var(--teal-500) 22%, transparent);
+  --link:          var(--teal-300);
+  --link-visited:  var(--lake-300);
+
+  --border:        #283330;
+  --border-strong: #3a4843;
+  --hairline:      color-mix(in oklab, #ffffff 9%, transparent);
+  --ring:          color-mix(in oklab, var(--teal-400) 55%, transparent);
+
+  --selection-bg:  color-mix(in oklab, var(--teal-500) 38%, transparent);
+  --selection-fg:  #ecfbf7;
+
+  --success:       var(--pine-300);
+  --info:          var(--lake-300);
+}
