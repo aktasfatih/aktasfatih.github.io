@@ -1,50 +1,9 @@
-// sections.jsx — Writing, Work, About, Contact, Footer
-const { Button, IconButton, Tag, Badge, Input } = window.FatihAktasDesignSystem_e4dcbf;
-
-function fmtDate(d) {
-  return new Date(d + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-}
+// sections.jsx — Work, About, Contact, Footer
+const { IconButton } = window.FatihAktasDesignSystem_e4dcbf;
 
 function Cmd({ path, cmd }) {
   return (
     <div className="cmd reveal"><span className="p">~/fatih&nbsp;$&nbsp;</span><span className="c">{cmd}</span>&nbsp;{path}</div>
-  );
-}
-
-/* ---------------- Writing ---------------- */
-function Writing() {
-  const I = window.SiteIcons;
-  const S = window.SITE;
-  return (
-    <section className="section" id="writing">
-      <div className="wrap">
-        <Cmd cmd="ls -lt" path="./writing" />
-        <div className="section__head reveal">
-          <div>
-            <h2 className="section__title">Recent <span className="accent">writing</span></h2>
-            <p className="section__lede">Field notes from the layer most people scroll past — logs, page faults, the cost of a context switch.</p>
-          </div>
-          <a className="link-more" href={S.social.github} target="_blank" rel="noreferrer">rss / archive <I.Rss size={14} /></a>
-        </div>
-        <div className="posts">
-          {S.posts.map((p, i) => (
-            <a className="postcard reveal" data-d={String((i % 4) + 1)} key={p.slug} href={S.social.github} target="_blank" rel="noreferrer">
-              <div className="postcard__num">{p.featured ? <span className="star">★</span> : <span>{String(i + 1).padStart(2, "0")}</span>}</div>
-              <div>
-                <h3 className="postcard__title">{p.title}</h3>
-                <p className="postcard__excerpt">{p.excerpt}</p>
-                <div className="postcard__meta">
-                  <span className="postcard__date"><I.Calendar size={13} /> {fmtDate(p.date)}</span>
-                  <span className="postcard__date"><I.Clock size={13} /> {p.readtime} min</span>
-                  <span className="postcard__tags">{p.tags.map((t) => <Tag key={t} hash>{t}</Tag>)}</span>
-                </div>
-              </div>
-              <div className="postcard__arrow"><I.ArrowUpRight size={20} /></div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -119,42 +78,23 @@ function About() {
 function Contact() {
   const I = window.SiteIcons;
   const S = window.SITE;
-  const [sent, setSent] = React.useState(false);
   return (
     <section className="section" id="contact">
       <div className="wrap">
         <Cmd cmd="./" path="contact.sh" />
         <div className="contact reveal">
-          <div className="contact__grid">
-            <div>
-              <h2>Get in <span className="accent">touch</span></h2>
-              <p className="contact__lede">Have a systems problem worth chewing on, or just want to say hi? My inbox is open.</p>
-              <div className="contact__prompt">
-                <span className="p">$</span> mail <a href={"mailto:" + S.social.email}>{S.social.email}</a>
-              </div>
-              <div className="contact__socials">
-                <IconButton label="GitHub" variant="outline" as="a" href={S.social.github} target="_blank"><I.Github size={18} /></IconButton>
-                <IconButton label="X" variant="outline" as="a" href={S.social.x} target="_blank"><I.XCom size={17} /></IconButton>
-                <IconButton label="LinkedIn" variant="outline" as="a" href={S.social.linkedin} target="_blank"><I.LinkedIn size={18} /></IconButton>
-                <IconButton label="Stack Overflow" variant="outline" as="a" href={S.social.stackoverflow} target="_blank"><I.StackOverflow size={18} /></IconButton>
-              </div>
+          <div className="contact__inner">
+            <h2>Get in <span className="accent">touch</span></h2>
+            <p className="contact__lede">Have a systems problem worth chewing on, or just want to say hi? My inbox is open.</p>
+            <div className="contact__prompt">
+              <span className="p">$</span> mail <a href={"mailto:" + S.social.email}>{S.social.email}</a>
             </div>
-            <form className="contact__form" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
-              <div className="contact__row">
-                <Input label="Name" placeholder="Ada Lovelace" required />
-                <Input label="Email" type="email" placeholder="you@domain.com" required />
-              </div>
-              <div className="fa-field">
-                <label className="fa-field__label" htmlFor="c-msg">Message</label>
-                <div className="fa-field__wrap">
-                  <textarea id="c-msg" className="fa-input" placeholder="What are you working on?" required />
-                </div>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)" }}>
-                <Button type="submit" iconRight={<I.ArrowRight size={16} />}>{sent ? "Sent — thanks!" : "Send message"}</Button>
-                {sent && <span style={{ fontFamily: "var(--font-mono)", fontSize: 12.5, color: "var(--success)" }}>✓ exit 0</span>}
-              </div>
-            </form>
+            <div className="contact__socials">
+              <IconButton label="GitHub" variant="outline" as="a" href={S.social.github} target="_blank"><I.Github size={18} /></IconButton>
+              <IconButton label="X" variant="outline" as="a" href={S.social.x} target="_blank"><I.XCom size={17} /></IconButton>
+              <IconButton label="LinkedIn" variant="outline" as="a" href={S.social.linkedin} target="_blank"><I.LinkedIn size={18} /></IconButton>
+              <IconButton label="Stack Overflow" variant="outline" as="a" href={S.social.stackoverflow} target="_blank"><I.StackOverflow size={18} /></IconButton>
+            </div>
           </div>
         </div>
       </div>
@@ -185,4 +125,4 @@ function Footer() {
   );
 }
 
-Object.assign(window, { Writing, Work, About, Contact, Footer, Cmd, fmtDate });
+Object.assign(window, { Work, About, Contact, Footer, Cmd });

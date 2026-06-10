@@ -56,8 +56,7 @@ function buildCommands({ go, setTheme }) {
           {[
             ["whoami", "who is this guy"],
             ["ls", "list the sections of this site"],
-            ["writing", "jump to recent writing  (also: work, about, contact)"],
-            ["cat <post>", "preview a post by number, e.g. cat 1"],
+            ["work", "jump to a section  (also: about, contact)"],
             ["neofetch", "system info, the fun way"],
             ["social", "where to find me"],
             ["theme [dark|light]", "flip the lights"],
@@ -83,16 +82,15 @@ function buildCommands({ go, setTheme }) {
       desc: "list sections",
       run: () => ({ node: (
         <span className="term__out">
-          <span className="mut">drwxr-xr-x  4 fatih  staff</span>{"\n"}
+          <span className="mut">drwxr-xr-x  3 fatih  staff</span>{"\n"}
           {[
-            ["writing/", `${S.posts.length} posts on linux & systems`],
             ["work/", "where I've been"],
             ["about/", "the longer story"],
             ["contact/", "say hi"],
           ].map(([n, d]) => (
             <span key={n}>{"  "}<span className="ac">{n.padEnd(12)}</span><span className="mut">{d}</span>{"\n"}</span>
           ))}
-          <span className="mut">{"  → type the name (e.g. "}</span><span className="ac">writing</span><span className="mut">{") to jump there."}</span>
+          <span className="mut">{"  → type the name (e.g. "}</span><span className="ac">work</span><span className="mut">{") to jump there."}</span>
         </span>
       )})
     },
@@ -118,7 +116,7 @@ function buildCommands({ go, setTheme }) {
   };
 
   // navigation aliases
-  const nav = { writing: "writing", work: "work", about: "about", contact: "contact", posts: "writing" };
+  const nav = { work: "work", about: "about", contact: "contact" };
   Object.entries(nav).forEach(([cmd, id]) => {
     list[cmd] = { desc: `go to ${id}`, run: () => ({ node: <span className="term__out mut">→ opening ./{id}…</span>, action: () => go(id) }) };
   });
@@ -159,24 +157,6 @@ function Terminal({ go, theme, setTheme, autorun = true }) {
       setHistory((h) => [...h, { cmd: line, node: <span className="term__out mut">theme → <span className="ac">{next}</span>. {next === "dark" ? "glacial night." : "snow."}</span> }]);
       return;
     }
-    if (cmd === "cat") {
-      const n = parseInt(args[0], 10);
-      const post = S.posts[n - 1] || S.posts.find((p) => p.slug === args[0]);
-      if (post) {
-        setHistory((h) => [...h, { cmd: line, node: (
-          <span className="term__out">
-            <span className="hl">{post.title}</span>{"\n"}
-            <span className="mut">{new Date(post.date + "T00:00:00").toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })} · {post.readtime} min read · {post.tags.map((t) => "#" + t).join(" ")}</span>{"\n\n"}
-            {post.excerpt}{"\n\n"}
-            <span className="mut">→ full text in </span><span className="ac">writing</span><span className="mut"> below.</span>
-          </span>
-        )}]);
-      } else {
-        setHistory((h) => [...h, { cmd: line, node: <span className="term__err">cat: {args[0] || "?"}: no such post. try <span className="ac">cat 1</span> … <span className="ac">cat {S.posts.length}</span>.</span> }]);
-      }
-      return;
-    }
-
     const found = commands[cmd];
     if (found) {
       const { node, action } = found.run(args);
@@ -185,7 +165,7 @@ function Terminal({ go, theme, setTheme, autorun = true }) {
     } else {
       setHistory((h) => [...h, { cmd: line, node: <span className="term__err">command not found: {cmd}. type <span className="ac">help</span>.</span> }]);
     }
-  }, [commands, theme, setTheme, S.posts]);
+  }, [commands, theme, setTheme]);
 
   // auto-type `whoami` on mount — but only animate when the tab is actually
   // visible and motion is allowed; otherwise (hidden/throttled iframe, reduced
@@ -226,13 +206,13 @@ function Terminal({ go, theme, setTheme, autorun = true }) {
       if (ni >= past.length) { setHIdx(-1); setInput(""); } else { setHIdx(ni); setInput(past[ni]); }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const all = [...Object.keys(commands), "clear", "theme", "cat"];
+      const all = [...Object.keys(commands), "clear", "theme"];
       const m = all.filter((c) => c.startsWith(input.toLowerCase()));
       if (m.length === 1) setInput(m[0]);
     } else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); setHistory([]); }
   };
 
-  const hints = ["help", "ls", "writing", "neofetch", "theme dark"];
+  const hints = ["help", "ls", "work", "neofetch", "theme dark"];
 
   return (
     <div className="term" onClick={() => inputRef.current && inputRef.current.focus()}>
