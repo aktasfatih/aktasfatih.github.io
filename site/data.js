@@ -15,8 +15,9 @@ window.SITE = {
     email: "hello@aktasfatih.com",
   },
   experience: [
-    { role: "Graduate training, Interactive Intelligence", org: "Georgia Tech", period: "2024 — Now", note: "Going deeper on the systems and machine-learning foundations under the craft." },
-    { role: "Software Engineer", org: "Lumnion", period: "2020 — 2022", note: "Backend & infrastructure for data-heavy products." },
-    { role: "B.Sc. Computer Engineering", org: "University of Alberta", period: "2015 — 2020", note: "Iron Ring earned. Edmonton winters survived." },
+    { role: "M.S. Computer Science", org: "Georgia Tech", period: "2024 — 2026", note: "Graduate study in CS with an AI specialization — 4.0 GPA, plus information security and software development." },
+    { role: "Software Engineer", org: "Lumnion", period: "2021 — 2022", note: "AI-powered risk & exposure tooling for insurance, plus OpenStreetMap data pipelines and fuzzy entity resolution over messy real-world data. JavaScript & Python." },
+    { role: "B.Sc. Computer Engineering", org: "University of Alberta", period: "2016 — 2021", note: "Iron Ring earned. Edmonton winters survived." },
+    { role: "Web Developer", org: "BLV", period: "2018", note: "PHP/MySQL content management — optimized queries, static page generation, and hardening against SQLi, XSS & CSRF." },
   ],
 };

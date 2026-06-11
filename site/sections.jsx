@@ -62,9 +62,9 @@ function About() {
             <div className="fact"><span className="fact__k">name</span><span className="fact__v">{S.name}</span></div>
             <div className="fact"><span className="fact__k">role</span><span className="fact__v"><span className="ac">{S.role}</span></span></div>
             <div className="fact"><span className="fact__k">based</span><span className="fact__v">{S.location}</span></div>
-            <div className="fact"><span className="fact__k">degree</span><span className="fact__v">B.Sc. Computer Eng.</span></div>
-            <div className="fact"><span className="fact__k">school</span><span className="fact__v">U of Alberta</span></div>
-            <div className="fact"><span className="fact__k">writes</span><span className="fact__v">linux · os · craft</span></div>
+            <div className="fact"><span className="fact__k">degree</span><span className="fact__v">M.S. CS · B.Sc. CompE</span></div>
+            <div className="fact"><span className="fact__k">school</span><span className="fact__v">Georgia Tech · UAlberta</span></div>
+            <div className="fact"><span className="fact__k">stack</span><span className="fact__v">Go · Node.js · Python · Cloud</span></div>
             <div className="fact"><span className="fact__k">editor</span><span className="fact__v">nvim</span></div>
             <div className="fact"><span className="fact__k">status</span><span className="fact__v"><span className="ac">open to interesting work</span></span></div>
           </div>

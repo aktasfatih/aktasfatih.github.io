@@ -23,8 +23,8 @@ function NeoFetch() {
     ["shell", "zsh 5.9"],
     ["editor", "nvim + pgsql.vim"],
     ["role", S.role],
-    ["uptime", "since 2015 — Iron Ring earned"],
-    ["writes", "linux · operating systems · craft"],
+    ["uptime", "since 2016 — Iron Ring earned"],
+    ["stack", "go · node.js · python · cloud"],
   ];
   return (
     <div className="neo">
