@@ -22,3 +22,19 @@ window.SITE = {
     { role: "Web Developer", org: "BLV", period: "2018", note: "PHP/MySQL content management — optimized queries, static page generation, and hardening against SQLi, XSS & CSRF." },
   ],
 };
+
+// LAB — small interactive apps I build to learn (and to teach). Each entry is a
+// card in the ~/lab grid on the landing page; the button opens the app. Adding
+// one is a single object here + a folder under site/lab/<slug>/.
+//   status: "live" | "wip"
+window.LAB = [
+  {
+    slug: "jq",
+    title: "jq trainer",
+    blurb: "Learn jq interactively — type real filters against sample JSON and watch them run. Twelve levels from the identity dot to aggregations, checked by real jq in WebAssembly.",
+    tags: ["jq", "JSON", "WASM"],
+    status: "live",
+    href: "lab/jq/",
+    cta: "Play",
+  },
+];
