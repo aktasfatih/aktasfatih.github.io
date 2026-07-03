@@ -207,6 +207,7 @@ body::before {
 .idcard__name { font-family: var(--font-display); font-size: var(--text-xl); color: var(--text-strong); letter-spacing: -.02em; margin: 0; line-height: 1.1; }
 .idcard__role { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted); margin: 7px 0 0; }
 .idcard__role .ac { color: var(--accent); }
+.idcard__focus { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .02em; color: var(--text-faint); margin: 4px 0 0; }
 .idcard__status { display: inline-flex; align-items: center; gap: 7px; margin-top: var(--space-3); font-family: var(--font-mono); font-size: 12px; color: var(--text-body); }
 .idcard__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 color-mix(in oklab, var(--success) 70%, transparent); animation: pulse 2.4s var(--ease-out) infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--success) 55%, transparent); } 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }

@@ -65,6 +65,9 @@ function About() {
             <div className="fact"><span className="fact__k">degree</span><span className="fact__v">M.S. CS · B.Sc. CompE</span></div>
             <div className="fact"><span className="fact__k">school</span><span className="fact__v">Georgia Tech · UAlberta</span></div>
             <div className="fact"><span className="fact__k">stack</span><span className="fact__v">Go · Node.js · Python · Cloud</span></div>
+            <div className="fact"><span className="fact__k">oss</span><span className="fact__v">WordPress Gutenberg</span></div>
+            <div className="fact"><span className="fact__k">langs</span><span className="fact__v">English · French</span></div>
+            <div className="fact"><span className="fact__k">awards</span><span className="fact__v">UAlberta scholarships</span></div>
             <div className="fact"><span className="fact__k">editor</span><span className="fact__v">nvim</span></div>
             <div className="fact"><span className="fact__k">status</span><span className="fact__v"><span className="ac">open to interesting work</span></span></div>
           </div>

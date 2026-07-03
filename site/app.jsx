@@ -61,6 +61,7 @@ function Hero({ go, theme, setTheme, autorun }) {
           <div className="idcard__body">
             <h1 className="idcard__name">{S.name}</h1>
             <p className="idcard__role"><span className="ac">{S.role}</span> · {S.location}</p>
+            <p className="idcard__focus">{S.focus}</p>
             <div className="idcard__status"><span className="idcard__dot" /> open to interesting work</div>
             <div className="idcard__socials">
               <IconButton label="GitHub" variant="outline" as="a" href={S.social.github} target="_blank"><I.Github size={18} /></IconButton>

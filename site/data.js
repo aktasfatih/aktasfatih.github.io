@@ -4,6 +4,7 @@
 window.SITE = {
   name: "Fatih Aktas",
   role: "Software Engineer",
+  focus: "Healthcare Tech · AI",
   location: "Toronto, Canada",
   intro:
     "I'm a computer engineer who likes systems that are simple on the outside and honest on the inside. I build software, run a few too many servers, and write about what breaks along the way.",
