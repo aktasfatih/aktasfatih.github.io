@@ -1,5 +1,5 @@
-// sections.jsx — Work, About, Contact, Footer
-const { IconButton } = window.FatihAktasDesignSystem_e4dcbf;
+// sections.jsx — Work, Lab, About, Contact, Footer
+const { IconButton, Button, Tag } = window.FatihAktasDesignSystem_e4dcbf;
 
 function Cmd({ path, cmd }) {
   return (
@@ -34,6 +34,44 @@ function Work() {
                 <p className="tl__note">{e.note}</p>
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Lab ---------------- */
+function Lab() {
+  const apps = window.LAB || [];
+  return (
+    <section className="section" id="lab">
+      <div className="wrap">
+        <Cmd cmd="ls" path="lab/" />
+        <div className="section__head reveal">
+          <div>
+            <h2 className="section__title">Things I build to <span className="accent">learn</span></h2>
+            <p className="section__lede">Small interactive apps — playgrounds and trainers I make to understand a tool by using it. More land here over time.</p>
+          </div>
+        </div>
+        <div className="lab">
+          {apps.map((app, i) => (
+            <a className="labcard reveal" data-d={String((i % 4) + 1)} key={app.slug} href={app.href} aria-label={`Open ${app.title}`}>
+              <div className="labcard__top">
+                <span className="labcard__path"><span className="labcard__slash">~/lab/</span>{app.slug}</span>
+                <span className={"labcard__status labcard__status--" + app.status}>
+                  <span className="labcard__dot" />{app.status === "live" ? "live" : "wip"}
+                </span>
+              </div>
+              <h3 className="labcard__title">{app.title}</h3>
+              <p className="labcard__blurb">{app.blurb}</p>
+              <div className="labcard__tags">
+                {app.tags.map((t) => <Tag key={t} hash>{t}</Tag>)}
+              </div>
+              <div className="labcard__foot">
+                <Button as="span" size="sm" iconRight={<span aria-hidden="true">→</span>}>{app.cta || "Open"}</Button>
+              </div>
+            </a>
           ))}
         </div>
       </div>
@@ -128,4 +166,4 @@ function Footer() {
   );
 }
 
-Object.assign(window, { Work, About, Contact, Footer, Cmd });
+Object.assign(window, { Work, Lab, About, Contact, Footer, Cmd });
