@@ -54,4 +54,22 @@ window.LAB = [
     href: "lab/regex/",
     cta: "Play",
   },
+  {
+    slug: "cron",
+    title: "cron trainer",
+    blurb: "Learn cron interactively — type a 5-field expression and watch the real upcoming run times appear. Twelve levels from every-minute to steps, ranges, and the day-of-month / day-of-week quirk, computed by a genuine cron parser.",
+    tags: ["cron", "scheduling", "unix"],
+    status: "live",
+    href: "lab/cron/",
+    cta: "Play",
+  },
+  {
+    slug: "chmod",
+    title: "chmod trainer",
+    blurb: "Learn Unix permissions interactively — write one chmod argument to reach a target mode and watch the bits flip live. Eleven levels from octal basics to symbolic clauses, setuid, and the sticky bit, checked by a faithful chmod engine.",
+    tags: ["chmod", "permissions", "unix"],
+    status: "live",
+    href: "lab/chmod/",
+    cta: "Play",
+  },
 ];
