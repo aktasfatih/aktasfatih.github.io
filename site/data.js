@@ -37,4 +37,13 @@ window.LAB = [
     href: "lab/jq/",
     cta: "Play",
   },
+  {
+    slug: "regex",
+    title: "regex trainer",
+    blurb: "Learn regular expressions interactively — type real patterns against sample text and watch them match live. Seventeen levels from a bare literal to capture groups and flags, run by your browser's native RegExp.",
+    tags: ["regex", "text", "RegExp"],
+    status: "live",
+    href: "lab/regex/",
+    cta: "Play",
+  },
 ];
