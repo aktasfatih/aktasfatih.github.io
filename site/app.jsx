@@ -19,6 +19,7 @@ const ACCENTS = {
 
 function Nav({ theme, setTheme }) {
   const links = [
+    ["projects", "projects"],
     ["work", "work"],
     ["lab", "lab"],
     ["about", "about"],
@@ -146,12 +147,13 @@ function App() {
   }, [t.reveals, checkReveals]);
 
   const go = React.useCallback((id) => scrollToId(id), []);
-  const { Work, Lab, About, Contact, Footer } = window;
+  const { Projects, Work, Lab, About, Contact, Footer } = window;
 
   return (
     <div className={"site density-" + t.density} style={accentVars} data-density={t.density}>
       <Nav theme={theme} setTheme={setTheme} />
       <Hero go={go} theme={theme} setTheme={setTheme} autorun={t.autorun} />
+      <Projects />
       <Work />
       <Lab />
       <About />

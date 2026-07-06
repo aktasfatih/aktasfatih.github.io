@@ -1,9 +1,47 @@
-// sections.jsx — Work, Lab, About, Contact, Footer
+// sections.jsx — Projects, Work, Lab, About, Contact, Footer
 const { IconButton, Button, Tag } = window.FatihAktasDesignSystem_e4dcbf;
 
 function Cmd({ path, cmd }) {
   return (
     <div className="cmd reveal"><span className="p">~/fatih&nbsp;$&nbsp;</span><span className="c">{cmd}</span>&nbsp;{path}</div>
+  );
+}
+
+/* ---------------- Projects ---------------- */
+function Projects() {
+  const I = window.SiteIcons;
+  const S = window.SITE;
+  return (
+    <section className="section" id="projects">
+      <div className="wrap">
+        <Cmd cmd="ls" path="./projects" />
+        <div className="section__head reveal">
+          <div>
+            <h2 className="section__title">Things I've <span className="accent">built</span></h2>
+            <p className="section__lede">Small, useful tools — shipped, live, and running in the open.</p>
+          </div>
+        </div>
+        <div className="projects">
+          {S.projects.map((p, i) => {
+            let host = p.url;
+            try { host = new URL(p.url).host; } catch (e) { /* keep raw */ }
+            return (
+              <a className="projectcard reveal" data-d={String((i % 4) + 1)} key={p.url} href={p.url} target="_blank" rel="noreferrer">
+                <div className="projectcard__head">
+                  <h3 className="projectcard__name">{p.name}</h3>
+                  <I.ArrowUpRight size={18} />
+                </div>
+                <p className="projectcard__desc">{p.tagline}</p>
+                <div className="projectcard__foot">
+                  <span className="projectcard__host">{host}</span>
+                  <span className="projectcard__tags">{p.tags.map((t) => <Tag key={t} hash>{t}</Tag>)}</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -166,4 +204,4 @@ function Footer() {
   );
 }
 
-Object.assign(window, { Work, Lab, About, Contact, Footer, Cmd });
+Object.assign(window, { Projects, Work, Lab, About, Contact, Footer, Cmd });

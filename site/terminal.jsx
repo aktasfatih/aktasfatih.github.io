@@ -56,7 +56,7 @@ function buildCommands({ go, setTheme }) {
           {[
             ["whoami", "who is this guy"],
             ["ls", "list the sections of this site"],
-            ["work", "jump to a section  (also: about, contact)"],
+            ["projects", "jump to a section  (also: work, about, contact)"],
             ["neofetch", "system info, the fun way"],
             ["social", "where to find me"],
             ["theme [dark|light]", "flip the lights"],
@@ -82,9 +82,11 @@ function buildCommands({ go, setTheme }) {
       desc: "list sections",
       run: () => ({ node: (
         <span className="term__out">
-          <span className="mut">drwxr-xr-x  3 fatih  staff</span>{"\n"}
+          <span className="mut">drwxr-xr-x  5 fatih  staff</span>{"\n"}
           {[
+            ["projects/", "things I've built"],
             ["work/", "where I've been"],
+            ["lab/", "things I build to learn"],
             ["about/", "the longer story"],
             ["contact/", "say hi"],
           ].map(([n, d]) => (
@@ -116,7 +118,7 @@ function buildCommands({ go, setTheme }) {
   };
 
   // navigation aliases
-  const nav = { work: "work", about: "about", contact: "contact" };
+  const nav = { projects: "projects", work: "work", lab: "lab", about: "about", contact: "contact" };
   Object.entries(nav).forEach(([cmd, id]) => {
     list[cmd] = { desc: `go to ${id}`, run: () => ({ node: <span className="term__out mut">→ opening ./{id}…</span>, action: () => go(id) }) };
   });
@@ -212,7 +214,7 @@ function Terminal({ go, theme, setTheme, autorun = true }) {
     } else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); setHistory([]); }
   };
 
-  const hints = ["help", "ls", "work", "neofetch", "theme dark"];
+  const hints = ["help", "ls", "projects", "neofetch", "theme dark"];
 
   return (
     <div className="term" onClick={() => inputRef.current && inputRef.current.focus()}>

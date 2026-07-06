@@ -15,6 +15,14 @@ window.SITE = {
     stackoverflow: "https://stackoverflow.com/users/5027899/fatih-akta%c5%9f",
     email: "hello@aktasfatih.com",
   },
+  projects: [
+    {
+      name: "Planning Poker",
+      url: "https://planning-poker.app/",
+      tagline: "Free, real-time planning poker for agile teams — no signup, live estimation, with Jira/Linear import and Slack/Teams reminders.",
+      tags: ["real-time", "agile", "saas"],
+    },
+  ],
   experience: [
     { role: "M.S. Computer Science", org: "Georgia Tech", period: "2024 — 2026", note: "Graduate study in CS with an AI specialization — 4.0 GPA, plus information security and software development." },
     { role: "Software Engineer", org: "Lumnion", period: "2021 — 2022", note: "AI-powered risk & exposure tooling for insurance, plus OpenStreetMap data pipelines and fuzzy entity resolution over messy real-world data. JavaScript & Python." },
