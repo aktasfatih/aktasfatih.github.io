@@ -72,4 +72,13 @@ window.LAB = [
     href: "lab/chmod/",
     cta: "Play",
   },
+  {
+    slug: "kubectl",
+    title: "kubectl trainer",
+    blurb: "Learn kubectl interactively — run real commands against a simulated Kubernetes cluster and watch pods, deployments, and services respond live. Sixteen levels from `get pods` to scaling, labels, namespaces, and rollouts, driven by a faithful in-browser cluster engine.",
+    tags: ["kubernetes", "kubectl", "devops"],
+    status: "live",
+    href: "lab/kubectl/",
+    cta: "Play",
+  },
 ];
