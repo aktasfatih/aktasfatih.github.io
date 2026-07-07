@@ -90,4 +90,13 @@ window.LAB = [
     href: "lab/zfs/",
     cta: "Play",
   },
+  {
+    slug: "gcloud",
+    title: "gcloud trainer",
+    blurb: "Learn the Google Cloud CLI interactively — run real gcloud and gsutil commands against a simulated project and watch config, Compute Engine VMs, Cloud Storage buckets, and APIs respond live. Sixteen levels from `gcloud config list` to launching VMs, enabling APIs, and making buckets, driven by an in-browser cloud engine.",
+    tags: ["gcloud", "gcp", "cloud"],
+    status: "live",
+    href: "lab/gcloud/",
+    cta: "Play",
+  },
 ];
