@@ -81,4 +81,13 @@ window.LAB = [
     href: "lab/kubectl/",
     cta: "Play",
   },
+  {
+    slug: "zfs",
+    title: "ZFS trainer",
+    blurb: "Learn ZFS interactively — run real zpool and zfs commands against a simulated storage system and watch pools, vdevs, datasets, and snapshots respond live. Fifteen levels from `zpool list` to mirrors, raidz, dataset properties, and snapshots, driven by an in-browser storage engine.",
+    tags: ["zfs", "zpool", "storage"],
+    status: "live",
+    href: "lab/zfs/",
+    cta: "Play",
+  },
 ];
