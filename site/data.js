@@ -99,4 +99,13 @@ window.LAB = [
     href: "lab/gcloud/",
     cta: "Play",
   },
+  {
+    slug: "mise",
+    title: "mise-en-place guide",
+    blurb: "A visual primer on mise (mise-en-place) — the one-binary dev-tool version manager, environment manager, and task runner. How shell activation works, how mise.toml config files resolve and take precedence, and the commands to get productive, explained with flowcharts and diagrams.",
+    tags: ["mise", "devtools", "toml"],
+    status: "live",
+    href: "lab/mise/",
+    cta: "Read",
+  },
 ];

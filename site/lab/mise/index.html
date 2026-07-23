@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mise-en-place — how it works, from zero · Fatih Aktas</title>
+  <meta name="description" content="A visual guide to mise (mise-en-place): the polyglot dev-tool version manager, environment manager, and task runner. How activation works, how config files resolve, and the commands to get up to speed — with flowcharts." />
+
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="page.css" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23112019'/%3E%3Cg fill='none' stroke='%2357bcab' stroke-width='6' stroke-linecap='round'%3E%3Cline x1='30' y1='34' x2='70' y2='34'/%3E%3Cline x1='30' y1='50' x2='70' y2='50'/%3E%3Cline x1='30' y1='66' x2='55' y2='66'/%3E%3C/g%3E%3Ccircle cx='68' cy='66' r='6' fill='%23cf8a1c'/%3E%3C/svg%3E" />
+
+  <!-- set the theme before first paint to avoid a flash -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("mise-guide:theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+<div class="mz">
+  <header class="mz-top">
+    <div class="mz-top__wrap">
+      <a class="mz-brand" href="../../" aria-label="Back to aktasfatih.com">
+        <span class="mz-brand__tile">mise</span>
+        <span class="mz-brand__name">~/lab/<b>mise</b></span>
+      </a>
+      <div class="mz-top__spacer"></div>
+      <a class="mz-back" href="../../">← aktasfatih.com</a>
+      <div class="mz-toggle" id="themeToggle" role="group" aria-label="Theme">
+        <button data-theme-set="light" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <button data-theme-set="dark" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mz-main">
+
+    <!-- ===== hero ===== -->
+    <section class="mz-hero">
+      <h1 class="mz-hero__title">Getting up to speed with <span class="ac">mise</span></h1>
+      <p class="mz-hero__lede">
+        <b>mise</b> (pronounced “meez”, short for the French kitchen term <i>mise-en-place</i> — “everything in
+        its place”) sets up your dev environment so every tool, variable, and task is exactly where it should
+        be the moment you <code>cd</code> into a project. It’s one binary that replaces asdf, nvm, pyenv,
+        direnv, and a bit of make.
+      </p>
+      <div class="mz-hero__meta">
+        <span class="mz-chip">one binary · <b>3 jobs</b></span>
+        <span class="mz-chip">config: <b>mise.toml</b></span>
+        <span class="mz-chip">formerly <b>rtx</b></span>
+        <span class="mz-chip">written in <b>Rust</b></span>
+      </div>
+      <div class="mz-code">
+        <div class="mz-code__bar"><span class="mz-code__dots"><i class="on"></i><i></i><i></i></span><span class="mz-code__name">install</span></div>
+        <pre><span class="c"># the one-liner (or: brew install mise · apt · winget · cargo install mise)</span>
+<span class="p">$</span> curl https://mise.run | sh</pre>
+      </div>
+    </section>
+
+    <!-- ===== what it is ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">the mental model</p>
+      <h2 class="mz-h2">One tool, three jobs</h2>
+      <p class="mz-p">
+        Everything mise does falls into three buckets. The same <code>mise.toml</code> file drives all three,
+        so a single committed config gets a teammate a byte-for-byte identical setup.
+      </p>
+      <div class="mz-pillars">
+        <div class="mz-pillar">
+          <div class="mz-pillar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l8 4.5-8 4.5-8-4.5z"/><path d="M4 12l8 4.5 8-4.5M4 16.5L12 21l8-4.5"/></svg></div>
+          <h3>Tool versions</h3>
+          <p>Installs and pins the exact version of node, python, go, terraform… per project. Your <code>node</code> becomes whatever the project says.</p>
+          <code>[tools] node = "20"</code>
+        </div>
+        <div class="mz-pillar">
+          <div class="mz-pillar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H6a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-2"/></svg></div>
+          <h3>Environment</h3>
+          <p>Sets and clears env vars as you enter and leave a directory — like direnv, built in. Load a <code>.env</code>, add to <code>PATH</code>, or set values inline.</p>
+          <code>[env] NODE_ENV = "dev"</code>
+        </div>
+        <div class="mz-pillar">
+          <div class="mz-pillar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9z"/></svg></div>
+          <h3>Tasks</h3>
+          <p>A project task runner — define <code>build</code>, <code>lint</code>, <code>test</code> once, with dependencies, and run them with the right tools already on <code>PATH</code>.</p>
+          <code>mise run build</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== activation flow ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">how it hooks in</p>
+      <h2 class="mz-h2">How mise gets onto your <code>PATH</code></h2>
+      <p class="mz-p">
+        mise doesn’t patch your binaries — it puts the right versions <i>in front</i> of everything else on
+        <code>PATH</code>. You wire it into your shell once; after that it re-evaluates on every prompt.
+      </p>
+      <div class="mz-flow">
+        <div class="mz-flow__step">
+          <h4><span class="mz-flow__num">1</span> Add the hook, once</h4>
+          <p>Append <code>eval "$(mise activate zsh)"</code> to <code>~/.zshrc</code> (or <code>bash</code>/<code>fish</code>). This registers a hook that runs right before each shell prompt.</p>
+        </div>
+        <div class="mz-flow__arrow"></div>
+        <div class="mz-flow__step">
+          <h4><span class="mz-flow__num">2</span> You <code>cd</code> or open a shell</h4>
+          <p>The hook fires. mise looks for config files starting in the current directory and walking up to <code>/</code>, plus your global config.</p>
+        </div>
+        <div class="mz-flow__arrow"></div>
+        <div class="mz-flow__step">
+          <h4><span class="mz-flow__num">3</span> It resolves versions &amp; env</h4>
+          <p>Every pinned tool’s <code>bin/</code> directory gets prepended to <code>PATH</code>, and <code>[env]</code> vars are exported (and un-exported when you leave).</p>
+        </div>
+        <div class="mz-flow__arrow"></div>
+        <div class="mz-flow__step mz-flow__step--accent">
+          <h4><span class="mz-flow__num">✓</span> <code>node</code> is the pinned version</h4>
+          <p>Now <code>which node</code> points at <code>~/.local/share/mise/installs/node/20/bin/node</code> — no version-manager subshell, no manual switching.</p>
+        </div>
+      </div>
+
+      <h3 class="mz-h3">Two ways to resolve: <code>activate</code> vs shims</h3>
+      <p class="mz-p">There are two mechanisms. Most people use <code>activate</code> for interactive shells and let shims cover everything else.</p>
+      <div class="mz-tabs" id="modeTabs">
+        <button class="mz-tab on" data-tab="activate">mise activate</button>
+        <button class="mz-tab" data-tab="shims">shims</button>
+      </div>
+      <div class="mz-panel on" data-panel="activate">
+        <div class="mz-twocol">
+          <div class="mz-code"><div class="mz-code__bar"><span class="mz-code__dots"><i class="on"></i><i></i><i></i></span><span class="mz-code__name">~/.zshrc</span></div><pre><span class="k">eval</span> <span class="s">"$(mise activate zsh)"</span></pre></div>
+          <p class="mz-p" style="margin:0">Rewrites <code>PATH</code> on every directory change. Fast, always current, and <code>which node</code> shows the real path. The catch: it only runs in an interactive shell that sourced the hook.</p>
+        </div>
+      </div>
+      <div class="mz-panel" data-panel="shims">
+        <div class="mz-twocol">
+          <div class="mz-code"><div class="mz-code__bar"><span class="mz-code__dots"><i class="on"></i><i></i><i></i></span><span class="mz-code__name">PATH</span></div><pre><span class="c"># shim dir on PATH; each shim</span>
+<span class="c"># dispatches to the right version</span>
+<span class="p">~</span>/.local/share/mise/shims/node</pre></div>
+          <p class="mz-p" style="margin:0">Small wrapper executables that forward to the correct version. They work anywhere <code>PATH</code> is read — IDEs, cron, CI, non-interactive scripts — but are a touch slower and need a <code>mise reshim</code> when a tool adds new binaries.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== config anatomy ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">the config file</p>
+      <h2 class="mz-h2">Anatomy of a <code>mise.toml</code></h2>
+      <p class="mz-p">
+        One TOML file, four sections you’ll actually use. Drop it in a project root, commit it, and everyone
+        who trusts it gets the same tools, env, and tasks.
+      </p>
+      <div class="mz-anno__legend">
+        <span class="mz-tag mz-tag--tools"><i></i>[tools] — versions to install</span>
+        <span class="mz-tag mz-tag--env"><i></i>[env] — environment variables</span>
+        <span class="mz-tag mz-tag--tasks"><i></i>[tasks] — project commands</span>
+        <span class="mz-tag mz-tag--settings"><i></i>[settings] — mise behavior</span>
+      </div>
+      <div class="mz-code">
+        <div class="mz-code__bar"><span class="mz-code__dots"><i class="on"></i><i></i><i></i></span><span class="mz-code__name">mise.toml</span></div>
+        <pre><span class="mz-blk mz-blk--tools"><span class="b">[tools]</span>
+<span class="k">node</span> = <span class="s">"20"</span>              <span class="c"># latest 20.x</span>
+<span class="k">python</span> = <span class="s">"3.12"</span>
+<span class="k">terraform</span> = <span class="s">"1.7.5"</span>       <span class="c"># exact pin</span>
+<span class="k">go</span> = <span class="s">"latest"</span>
+<span class="s">"npm:prettier"</span> = <span class="s">"latest"</span>  <span class="c"># backend:tool — npm, cargo, pipx, ubi, aqua…</span></span>
+<span class="mz-blk mz-blk--env"><span class="b">[env]</span>
+<span class="k">NODE_ENV</span> = <span class="s">"development"</span>
+<span class="k">_.file</span> = <span class="s">".env"</span>            <span class="c"># load vars from a dotenv file</span>
+<span class="k">_.path</span> = [<span class="s">"./bin"</span>]         <span class="c"># prepend project ./bin to PATH</span></span>
+<span class="mz-blk mz-blk--tasks"><span class="b">[tasks.build]</span>
+<span class="k">run</span> = <span class="s">"npm run build"</span>
+<span class="k">depends</span> = [<span class="s">"lint"</span>]         <span class="c"># run lint first</span>
+
+<span class="b">[tasks.lint]</span>
+<span class="k">run</span> = <span class="s">"eslint ."</span></span>
+<span class="mz-blk mz-blk--settings"><span class="b">[settings]</span>
+<span class="k">experimental</span> = <span class="k">true</span></span></pre>
+      </div>
+      <div class="mz-callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.1l-8-14a2 2 0 0 0-3.4 0z"/></svg>
+        <p><b>Trust before it runs.</b> Because a config can set env vars and run hooks, mise refuses to load an unfamiliar one until you <code>mise trust</code> it. Clone a repo, and its <code>mise.toml</code> stays inert until you say so — so a malicious project can’t silently inject <code>PATH</code> or secrets.</p>
+      </div>
+    </section>
+
+    <!-- ===== precedence ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">which config wins</p>
+      <h2 class="mz-h2">Config resolution &amp; precedence</h2>
+      <p class="mz-p">
+        mise merges every config it finds from your current directory up to the filesystem root, then your
+        global config underneath. When two set the same key, the one <b>nearest your directory wins</b>, and a
+        <code>.local</code> file beats its committed sibling. (Hover a layer.)
+      </p>
+      <div class="mz-stackwrap">
+        <div class="mz-stack">
+          <div class="mz-layer mz-layer--1"><span class="mz-layer__file">./mise.local.toml</span><span class="mz-layer__note">your machine only · git-ignored · highest</span></div>
+          <div class="mz-layer mz-layer--2"><span class="mz-layer__file">./mise.toml</span><span class="mz-layer__note">the project · committed &amp; shared</span></div>
+          <div class="mz-layer mz-layer--3"><span class="mz-layer__file">../mise.toml</span><span class="mz-layer__note">a parent directory · monorepo defaults</span></div>
+          <div class="mz-layer mz-layer--4"><span class="mz-layer__file">~/.config/mise/config.toml</span><span class="mz-layer__note">global · your personal baseline</span></div>
+        </div>
+        <div class="mz-winarrow">
+          <svg viewBox="0 0 20 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="116" x2="10" y2="6"/><path d="M4 14l6-8 6 8"/></svg>
+          <span>wins</span>
+        </div>
+      </div>
+      <p class="mz-p">
+        Two more knobs: a <code>.tool-versions</code> file (asdf’s format) is still read for compatibility, and
+        <b>environment-specific</b> configs load when you set <code>MISE_ENV</code> — e.g.
+        <code>mise.production.toml</code> layers on top when <code>MISE_ENV=production</code>.
+        Run <code>mise config</code> to see exactly which files are active and in what order.
+      </p>
+    </section>
+
+    <!-- ===== cd sequence ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">step by step</p>
+      <h2 class="mz-h2">What happens when you <code>cd project/</code></h2>
+      <ol class="mz-steps">
+        <li><h4>The prompt hook fires</h4><p>Your shell is about to draw a prompt; the hook installed by <code>mise activate</code> runs first.</p></li>
+        <li><h4>mise finds the configs</h4><p>It collects <code>mise.toml</code> and friends from here up to <code>/</code>, plus the global config, and merges them by precedence.</p></li>
+        <li><h4>Missing tools? It tells you</h4><p>If a pinned version isn’t installed yet, mise warns (or auto-installs, depending on settings). <code>mise install</code> fetches everything the config asks for.</p></li>
+        <li><h4>PATH &amp; env are rewritten</h4><p>Each tool’s <code>bin/</code> is prepended to <code>PATH</code>, and <code>[env]</code> vars are exported. Leaving the directory reverses it cleanly.</p></li>
+        <li><h4>You just… work</h4><p><code>node</code>, <code>python</code>, <code>terraform</code> now resolve to the project’s versions. No subshell, no <code>nvm use</code>, nothing to remember.</p></li>
+      </ol>
+    </section>
+
+    <!-- ===== commands ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">the cheat sheet</p>
+      <h2 class="mz-h2">Commands to get up to speed</h2>
+      <div class="mz-tablewrap">
+        <table class="mz-table">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>mise use node@20</code></td><td>Add a tool to <code>mise.toml</code> here and install it. Add <code>-g</code> for your global config.</td></tr>
+            <tr><td><code>mise install</code></td><td>Install every tool the active config pins (great first step in a fresh clone).</td></tr>
+            <tr><td><code>mise ls</code> / <code>mise current</code></td><td>Show installed tools / the versions active right now.</td></tr>
+            <tr><td><code>mise ls-remote node</code></td><td>List every version available to install for a tool.</td></tr>
+            <tr><td><code>mise exec node@22 -- node -v</code></td><td>Run a one-off command under a specific version without changing config.</td></tr>
+            <tr><td><code>mise run build</code></td><td>Run a task from <code>[tasks]</code> (with its <code>depends</code> first). <code>mise tasks</code> lists them.</td></tr>
+            <tr><td><code>mise trust</code></td><td>Mark the current directory’s config as trusted so mise will load it.</td></tr>
+            <tr><td><code>mise config</code></td><td>Show which config files are active, and in what precedence.</td></tr>
+            <tr><td><code>mise doctor</code></td><td>Diagnose setup problems — activation, shims, PATH, plugins.</td></tr>
+            <tr><td><code>mise upgrade</code></td><td>Bump installed tools to the newest allowed by each version spec.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== replaces ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">why bother</p>
+      <h2 class="mz-h2">What it replaces</h2>
+      <p class="mz-p">The pitch is consolidation: one config, one tool, instead of a pile of single-purpose managers that each need their own setup and shell hook.</p>
+      <div class="mz-tablewrap">
+        <table class="mz-table">
+          <thead><tr><th>Instead of…</th><th>mise gives you…</th></tr></thead>
+          <tbody>
+            <tr><td><code>nvm</code>, <code>pyenv</code>, <code>rbenv</code></td><td>One version manager for every language, sharing the asdf plugin ecosystem plus faster core backends.</td></tr>
+            <tr><td><code>asdf</code></td><td>A drop-in with <code>.tool-versions</code> compatibility, but written in Rust (much faster) and no per-tool shims by default.</td></tr>
+            <tr><td><code>direnv</code></td><td>Built-in per-directory env vars and dotenv loading via <code>[env]</code>.</td></tr>
+            <tr><td><code>make</code>, <code>just</code></td><td>A task runner in the same file, with dependencies and your pinned tools already on <code>PATH</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== where files live ===== -->
+    <section class="mz-section">
+      <p class="mz-kicker">reference</p>
+      <h2 class="mz-h2">Where config lives</h2>
+      <p class="mz-p">mise recognizes a whole family of filenames so it slots into existing conventions. The common ones:</p>
+      <div class="mz-tablewrap">
+        <table class="mz-table">
+          <thead><tr><th>Path</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>mise.toml</code> · <code>.mise.toml</code></td><td>Project config. Committed to the repo.</td></tr>
+            <tr><td><code>mise.local.toml</code></td><td>Personal overrides for this project — git-ignore it.</td></tr>
+            <tr><td><code>mise.{env}.toml</code></td><td>Environment-specific, loaded when <code>MISE_ENV</code> matches (e.g. <code>mise.production.toml</code>).</td></tr>
+            <tr><td><code>~/.config/mise/config.toml</code></td><td>Your global baseline across every project.</td></tr>
+            <tr><td><code>.tool-versions</code></td><td>Legacy asdf format — read for compatibility.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="mz-foot">
+      <span>a visual primer · not affiliated with the mise project</span>
+      <span>official docs → <a href="https://mise.jdx.dev" target="_blank" rel="noreferrer">mise.jdx.dev</a></span>
+    </footer>
+  </main>
+</div>
+
+<script src="page.js"></script>
+</body>
+</html>
