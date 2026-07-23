@@ -24,6 +24,7 @@ window.SITE = {
     },
   ],
   experience: [
+    { role: "Software Engineer", org: "MaxMind", period: "2022 — Now", note: "Internal developer tools, micro-services, and daemons in Go and Perl — porting legacy Perl business logic to Go with better performance, tests, and docs, and building servers, cron jobs & systemd timers. Observability and delivery via Prometheus, Ansible, TeamCity & Terraform." },
     { role: "M.S. Computer Science", org: "Georgia Tech", period: "2024 — 2026", note: "Graduate study in CS with an AI specialization — 4.0 GPA, plus information security and software development." },
     { role: "Software Engineer", org: "Lumnion", period: "2021 — 2022", note: "AI-powered risk & exposure tooling for insurance, plus OpenStreetMap data pipelines and fuzzy entity resolution over messy real-world data. JavaScript & Python." },
     { role: "B.Sc. Computer Engineering", org: "University of Alberta", period: "2016 — 2021", note: "Iron Ring earned. Edmonton winters survived." },
